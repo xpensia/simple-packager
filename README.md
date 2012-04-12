@@ -1,18 +1,75 @@
-# README for a newly created project.
+# Package manager for linux binaries
 
-There are a couple of things you should do first, before you can use all of Git's power:
+There is no goal to replace aptitude, yum or pacman.
+This package manager aim to provide à simple way to build minimal linux system from a running distro.
 
-  * Add a remote to this project: in the Cloud9 IDE command line, you can execute the following commands
-    `git remote add [remote name] [remote url (eg. 'git@github.com:/ajaxorg/node_chat')]` [Enter]
-  * Create new files inside your project
-  * Add them to to Git by executing the following command
-    `git add [file1, file2, file3, ...]` [Enter]
-  * Create a commit which can be pushed to the remote you just added
-    `git commit -m 'added new files'` [Enter]
-  * Push the commit the remote
-    `git push [remote name] master` [Enter]
+It may be usefull for building small chroot system.
 
-That's it! If this doesn't work for you, please visit the excellent resources from [Github.com](http://help.github.com) and the [Pro Git](http://http://progit.org/book/) book.
-If you can't find your answers there, feel free to ask us via Twitter (@cloud9ide), [mailing list](groups.google.com/group/cloud9-ide) or IRC (#cloud9ide on freenode).
+It's one of the base building block of xpensia's PaaS :)
 
-Happy coding!
+> What looks like a cool idea at first may be stupid later. -- @JeanSebTr, writing a fraking package manager.
+
+## xpensia-slp
+
+The script name : `xpensia-slp`
+
+General usage : `xpensia-slp [options] command [arguments...]`
+
+
+## command _add_
+
+Usage : `xpensia-slp add <file> [more files...] <package>`
+
+Will add `file` to a new or existing `package`.
+ * Add simple files as is
+ * Add binary and check dependencies
+ * Resolve library dependencies with `ldd`
+ * Follow and preserve symlinks in the package
+
+
+## command _show_
+
+Usage : `xpensia-slp show <package>`
+
+Show information about the `package`.
+ * Meta data : md5, date ...
+ * Dependencies
+ * Version ?
+
+## command _list_
+
+Usage : `xpensia-slp list <package>`
+
+Will list every file from `package`.
+
+
+## command _install_
+
+Usage : `xpensia-slp install <package>`
+
+Will install the specified `package` on the system.
+ * Resolve dependencies
+ * Install the package and all the dependencies
+
+
+## command _optimise_
+
+Usage : `xpensia-slp optimise`
+
+Special command for cache administration.
+ * Read all the packages and the files they contain
+ * Cross reference the files which are common to multiple packages
+ * Build new packages from the common files
+ * Add dependencies informations
+
+
+
+
+
+
+
+
+
+
+
+
